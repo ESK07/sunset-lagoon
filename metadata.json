@@ -1,0 +1,6 @@
+{
+  "name": "Sunset Gardens and Lagoon Gweru",
+  "description": "Women-owned event venue, botanical gardens, and outdoor lagoon destination at 8 Mt Pleasant Rd, Harben Park, Gweru. Weddings, family picnics, photo shoots, zip lining, and quad biking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
