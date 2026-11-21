@@ -11,7 +11,7 @@ const EXPERIENCE_OPTIONS: { id: ExperienceId; label: string }[] = [
   { id: 'weddings', label: 'Wedding or Private Event' },
   { id: 'picnics', label: 'Family Picnic & Photo Shoot' },
   { id: 'zipline', label: 'Lagoon Zip Line Session' },
-  { id: 'quadbikes', label: 'Quad Bike Trail Session' },
+  { id: 'lagoon', label: 'Lagoon Pool & Quad Trails' },
 ];
 
 const ARRIVAL_SLOTS = [

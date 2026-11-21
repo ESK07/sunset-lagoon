@@ -1,5 +1,6 @@
-import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
-import { PageId, VENUE_INFO } from '../data/venueData';
+import { useState } from 'react';
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import { HERO_FEATURE_IMAGES, PageId, VENUE_INFO } from '../data/venueData';
 import { ResilientImage } from './ResilientImage';
 
 interface HeroSectionProps {
@@ -16,9 +17,9 @@ const HOME_DIRECTORY: {
   {
     page: 'experiences',
     number: '01',
-    title: 'Experiences & Grounds',
+    title: 'Experiences & Photo Gallery',
     description:
-      'Weddings, lagoon zip lining, guided quad bike trails, family picnics, and garden photo shoots.',
+      'Weddings in the thatched hall, lagoon zip lining, lagoon pool, and all 13 venue photos.',
     actionLabel: 'Explore Experiences',
   },
   {
@@ -48,6 +49,13 @@ const HOME_DIRECTORY: {
 ];
 
 export function HeroSection({ onNavigate }: HeroSectionProps) {
+  const [heroIndex, setHeroIndex] = useState(0);
+  const activeSlide = HERO_FEATURE_IMAGES[heroIndex];
+
+  const prevSlide = () =>
+    setHeroIndex((prev) => (prev - 1 + HERO_FEATURE_IMAGES.length) % HERO_FEATURE_IMAGES.length);
+  const nextSlide = () => setHeroIndex((prev) => (prev + 1) % HERO_FEATURE_IMAGES.length);
+
   return (
     <section id="top" className="bg-[#F8F9F7]">
       <div className="mx-auto max-w-[1200px] px-6 pt-10 pb-16 lg:pt-14 lg:pb-20">
@@ -67,8 +75,8 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
 
               <p className="mt-5 max-w-[54ch] text-base leading-relaxed text-[#52605A]">
                 Set at 8 Mt Pleasant Road in Harben Park, Sunset Gardens and Lagoon Gweru pairs
-                manicured botanical lawns and lakeside views with wedding hosting, family picnics,
-                photo shoots, zip lining, and quad biking.
+                sculpted botanical lawns and the signature lagoon pool with thatched-hall wedding
+                hosting, family picnics, photo shoots, zip lining, and quad biking.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -104,33 +112,51 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="relative h-full min-h-[300px] overflow-hidden rounded-xl border border-[#DDE3DE] bg-[#E8ECE8] lg:min-h-[440px]">
+            <div className="relative h-full min-h-[320px] overflow-hidden rounded-xl border border-[#DDE3DE] bg-[#E8ECE8] lg:min-h-[440px]">
               <ResilientImage
-                src={VENUE_INFO.heroImage}
-                alt="Sunset Gardens and Lagoon Gweru manicured green lawns, timber lakeside walkway, and calm lagoon at golden hour"
+                src={activeSlide.src}
+                alt={activeSlide.title}
                 fallbackTitle="Sunset Gardens and Lagoon Gweru"
                 priority
                 className="h-full w-full object-cover"
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-6">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-6">
                 <div className="flex flex-wrap items-end justify-between gap-4 text-white">
                   <div>
-                    <p className="text-xs font-medium text-white/85">
-                      8 Mt Pleasant Rd, Harben Park · Gweru
-                    </p>
-                    <p className="mt-0.5 font-display text-lg font-medium">
-                      Sunset Lagoon Grounds &amp; Pavilion
-                    </p>
+                    <p className="text-xs font-medium text-white/85">{activeSlide.subtitle}</p>
+                    <p className="mt-0.5 font-display text-lg font-medium">{activeSlide.title}</p>
                   </div>
-                  <a
-                    href={VENUE_INFO.facebookDirectionsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="pointer-events-auto inline-flex items-center gap-1 text-xs font-medium text-white underline-offset-4 hover:underline whitespace-nowrap shrink-0"
-                  >
-                    <span>Facebook Route Post</span>
-                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={prevSlide}
+                      aria-label="Previous venue photo"
+                      className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-white/25 bg-black/40 text-white transition-colors hover:bg-black/65"
+                    >
+                      <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                    <span className="min-w-[3ch] text-center text-xs font-medium text-white/90 tabular-nums">
+                      {heroIndex + 1}/{HERO_FEATURE_IMAGES.length}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={nextSlide}
+                      aria-label="Next venue photo"
+                      className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-white/25 bg-black/40 text-white transition-colors hover:bg-black/65"
+                    >
+                      <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                    </button>
+                    <a
+                      href={VENUE_INFO.facebookDirectionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-2 inline-flex items-center gap-1 text-xs font-medium text-white underline-offset-4 hover:underline whitespace-nowrap shrink-0"
+                    >
+                      <span>Facebook Route</span>
+                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -185,10 +211,10 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             </div>
             <button
               type="button"
-              onClick={() => onNavigate('directions')}
+              onClick={() => onNavigate('experiences')}
               className="cursor-pointer text-sm font-medium text-[#133A2E] underline-offset-4 hover:underline whitespace-nowrap shrink-0"
             >
-              Need route directions to Harben Park?
+              Browse all 13 venue photos &rarr;
             </button>
           </div>
 

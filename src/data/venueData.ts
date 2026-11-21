@@ -1,4 +1,4 @@
-export type ExperienceId = 'weddings' | 'zipline' | 'quadbikes' | 'picnics';
+export type ExperienceId = 'weddings' | 'zipline' | 'lagoon' | 'picnics';
 
 export interface VenueExperience {
   id: ExperienceId;
@@ -11,6 +11,15 @@ export interface VenueExperience {
   imageSrc: string;
   imageAlt: string;
   featured?: boolean;
+}
+
+export interface GalleryPhoto {
+  id: string;
+  src: string;
+  alt: string;
+  title: string;
+  category: 'lagoon' | 'weddings' | 'gardens';
+  categoryLabel: string;
 }
 
 export interface GuestReview {
@@ -49,26 +58,44 @@ export const VENUE_INFO = {
     'https://www.facebook.com/sunsetgardensgweru/posts/sunset-lagoon-location-and-directions-/1323804523093364/',
   googleMapsUrl:
     'https://www.google.com/maps/search/?api=1&query=HV8M%2B5P+Gweru',
-  heroImage: '/src/assets/images/hero_sunset_lagoon_1795187340263.jpg',
+  heroImage: '/assets/sunset-lagoon/lagoon_aerial_pool.jpg',
 };
+
+export const HERO_FEATURE_IMAGES = [
+  {
+    src: '/assets/sunset-lagoon/lagoon_aerial_pool.jpg',
+    title: 'Sunset Lagoon Pool & Island Gazebo',
+    subtitle: '8 Mt Pleasant Rd, Harben Park · Gweru',
+  },
+  {
+    src: '/assets/sunset-lagoon/thatched_pavilion_sunset.jpg',
+    title: 'Thatched Reception Pavilion & Lawns',
+    subtitle: 'Weddings & Event Hosting Facilities',
+  },
+  {
+    src: '/assets/sunset-lagoon/sunset_garden_bridge.jpg',
+    title: 'Golden Hour Garden Bridge & Walkways',
+    subtitle: 'Botanical Greenery & Photo Shoots',
+  },
+];
 
 export const VENUE_EXPERIENCES: VenueExperience[] = [
   {
     id: 'weddings',
     number: '01',
     title: 'Weddings & Event Hosting',
-    category: 'Private Ceremonies · Receptions',
+    category: 'Outdoor Ceremony · Thatched Reception Hall',
     hoursNote: '8:00 AM – 5:00 PM standard garden hire',
     summary:
-      'Expansive manicured lawns overlooking the lagoon, dedicated event hosting facilities, and mature shade trees tailored for weddings, anniversaries, and private celebrations in Gweru.',
+      'Exchange vows on manicured green lawns framed by our heart-shaped topiary arch, then celebrate inside the thatched chandelier reception hall overlooking the gardens in Harben Park.',
     highlights: [
-      'Lakeside ceremony lawn & timber pavilion backdrop',
-      'Dedicated green spaces for bridal & family photo shoots',
-      'On-site event coordination & pre-event walkthroughs',
+      'Outdoor white-aisle ceremony lawn & heart topiary backdrop',
+      'Spacious thatched reception hall with crystal chandelier & draping',
+      'Full banquet table styling & pre-event coordination',
     ],
-    imageSrc: '/src/assets/images/weddings_garden_pavilion_1795187341450.jpg',
+    imageSrc: '/assets/sunset-lagoon/outdoor_wedding_ceremony.jpg',
     imageAlt:
-      'Outdoor garden wedding ceremony arch and white chairs beside the calm lagoon at Sunset Gardens and Lagoon Gweru',
+      'Outdoor garden wedding ceremony with white aisle runner, white chairs, heart topiary arch, and thatched hall at Sunset Gardens and Lagoon Gweru',
     featured: true,
   },
   {
@@ -78,49 +105,155 @@ export const VENUE_EXPERIENCES: VenueExperience[] = [
     category: 'Daylight Outdoor Adventure',
     hoursNote: '8:00 AM – 4:15 PM (full daylight only)',
     summary:
-      'Soar across the botanical canopy and reflective lagoon water. For clear visibility and harness inspection, the zip line operates strictly during daylight hours prior to 5:00 PM close.',
+      'Glide high across the open skies and grounds on our lagoon zip line. For clear visibility and harness inspection, the zip line operates strictly during daylight hours before 5:00 PM close.',
     highlights: [
       'Guided harness check before every launch',
-      'Full daylight operation only — arrives before 4:15 PM',
-      'Panoramic aerial views across Harben Park greenery',
+      'Daylight-only operation — arrive before 4:15 PM',
+      'High-altitude views across Sunset Lagoon grounds',
     ],
-    imageSrc: '/src/assets/images/lagoon_zipline_adventure_1795187340501.jpg',
-    imageAlt:
-      'Daylight zip line platform and steel cable spanning across lush green gardens and lagoon water',
+    imageSrc: '/assets/sunset-lagoon/lagoon_zipline_real.jpg',
+    imageAlt: 'Visitor riding the outdoor zip line at Sunset Gardens and Lagoon Gweru in daylight',
   },
   {
-    id: 'quadbikes',
+    id: 'lagoon',
     number: '03',
-    title: 'Quad Bike Trails',
-    category: 'Guided Trail Sessions',
-    hoursNote: '8:00 AM – 4:15 PM · Mandatory briefing',
+    title: 'Sunset Lagoon Pool & Grounds',
+    category: 'Lagoon Swim · Sand Beach · Quad Trails',
+    hoursNote: '8:00 AM – 4:15 PM · Safety briefings on-site',
     summary:
-      'Explore designated red-earth garden tracks on recreational quad bikes. Every rider completes a mandatory safety briefing and wears provided protective helmets prior to trail dispatch.',
+      'Enjoy the signature Sunset Lagoon pool with its central island walkway, shaded poolside umbrellas, white sand area, water slide, and guided daylight quad bike tracks.',
     highlights: [
-      'Helmets & pre-ride speed orientation required',
-      'Supervised daylight trail laps for clear terrain sightlines',
-      'Direct on-site staff check-in at reception',
+      'Lagoon-style swimming pool with central circular pavilion',
+      'White sand leisure beach, umbrellas & kids water slide',
+      'Daylight quad bike sessions with mandatory helmet & safety briefing',
     ],
-    imageSrc: '/src/assets/images/quad_bike_trail_1795187340537.jpg',
+    imageSrc: '/assets/sunset-lagoon/lagoon_aerial_grounds.jpg',
     imageAlt:
-      'Recreational quad bikes lined up with helmets along a red-earth garden trail in daylight',
+      'Aerial view of Sunset Lagoon pool, sandy beach area, shaded pavilions, and green lawns in Harben Park, Gweru',
   },
   {
     id: 'picnics',
     number: '04',
-    title: 'Family Picnics & Photo Shoots',
-    category: 'Casual Outings · Greenery',
+    title: 'Gardens, Picnics & Photo Shoots',
+    category: 'White Gazebo · Sculpted Hedges · Sunset Bridge',
     hoursNote: '8:00 AM – 5:00 PM daily access',
     summary:
-      'Unwind under sprawling shade trees beside the water. Celebrated by guests for spectacular greenery, quiet lakeside lawns, and scenic corners for graduation, maternity, and family portraits.',
+      'Celebrated by guests for spectacular greenery — wander across brick pathways to the white octagonal gazebo, sunset garden bridge, and manicured hedges ideal for picnics and milestone portraits.',
     highlights: [
-      'Shaded lakeside picnic lawns for families & small groups',
-      'Natural golden-hour light from 3:00 PM to 4:45 PM',
-      'Walk-in casual outings or reserved group picnic setups',
+      'White octagonal gazebo & arched timber garden bridge',
+      'Sculpted evergreen hedges & heart-shaped topiary archways',
+      'Peaceful lawns for family outings and golden-hour portraits',
     ],
-    imageSrc: '/src/assets/images/family_picnic_greenery_1795187341878.jpg',
+    imageSrc: '/assets/sunset-lagoon/white_garden_gazebo.jpg',
     imageAlt:
-      'Families enjoying a sunlit picnic on green grass under mature trees beside the lagoon',
+      'White octagonal garden gazebo surrounded by lush sculpted greenery and stone walkway at Sunset Gardens and Lagoon Gweru',
+  },
+];
+
+export const VENUE_GALLERY: GalleryPhoto[] = [
+  {
+    id: 'lagoon-aerial-pool',
+    src: '/assets/sunset-lagoon/lagoon_aerial_pool.jpg',
+    alt: 'Aerial view of the Sunset Gardens lagoon pool, island walkway, and inflatable slide',
+    title: 'Sunset Lagoon Pool & Island Walkway',
+    category: 'lagoon',
+    categoryLabel: 'Lagoon & Adventure',
+  },
+  {
+    id: 'lagoon-aerial-grounds',
+    src: '/assets/sunset-lagoon/lagoon_aerial_grounds.jpg',
+    alt: 'Wide aerial view of Sunset Lagoon, white sand area, and surrounding pavilions',
+    title: 'Lagoon Beach & Venue Grounds',
+    category: 'lagoon',
+    categoryLabel: 'Lagoon & Adventure',
+  },
+  {
+    id: 'lagoon-zipline',
+    src: '/assets/sunset-lagoon/lagoon_zipline_real.jpg',
+    alt: 'Zip line rider soaring across clear blue sky at Sunset Lagoon Gweru',
+    title: 'Daylight Lagoon Zip Line',
+    category: 'lagoon',
+    categoryLabel: 'Lagoon & Adventure',
+  },
+  {
+    id: 'outdoor-ceremony',
+    src: '/assets/sunset-lagoon/outdoor_wedding_ceremony.jpg',
+    alt: 'Garden wedding ceremony aisle and white chairs facing the heart topiary arch',
+    title: 'Garden Wedding Ceremony Lawn',
+    category: 'weddings',
+    categoryLabel: 'Weddings & Reception',
+  },
+  {
+    id: 'reception-chandelier',
+    src: '/assets/sunset-lagoon/reception_hall_chandelier.jpg',
+    alt: 'Inside the thatched reception hall with crystal chandelier and draped wedding tables',
+    title: 'Thatched Hall & Chandelier Setup',
+    category: 'weddings',
+    categoryLabel: 'Weddings & Reception',
+  },
+  {
+    id: 'reception-banquet',
+    src: '/assets/sunset-lagoon/reception_banquet_hall.jpg',
+    alt: 'Banquet table place settings inside the thatched wedding reception hall',
+    title: 'Reception Dining & Timber Ceiling',
+    category: 'weddings',
+    categoryLabel: 'Weddings & Reception',
+  },
+  {
+    id: 'reception-table-decor',
+    src: '/assets/sunset-lagoon/reception_table_decor.jpg',
+    alt: 'Gold charger plates, burgundy napkins, floral centerpieces, and fairy-light backdrop',
+    title: 'Banquet Table Styling & Lights',
+    category: 'weddings',
+    categoryLabel: 'Weddings & Reception',
+  },
+  {
+    id: 'thatched-pavilion',
+    src: '/assets/sunset-lagoon/thatched_pavilion_sunset.jpg',
+    alt: 'Exterior of the thatched main venue building and manicured green lawn at sunset',
+    title: 'Thatched Main Pavilion at Sunset',
+    category: 'weddings',
+    categoryLabel: 'Weddings & Reception',
+  },
+  {
+    id: 'white-gazebo',
+    src: '/assets/sunset-lagoon/white_garden_gazebo.jpg',
+    alt: 'White octagonal gazebo surrounded by green hedges and stone paths',
+    title: 'White Octagonal Garden Gazebo',
+    category: 'gardens',
+    categoryLabel: 'Gardens & Photo Spots',
+  },
+  {
+    id: 'sunset-bridge',
+    src: '/assets/sunset-lagoon/sunset_garden_bridge.jpg',
+    alt: 'White wooden arched bridge lit by golden sunset light through garden trees',
+    title: 'Sunset Arched Garden Bridge',
+    category: 'gardens',
+    categoryLabel: 'Gardens & Photo Spots',
+  },
+  {
+    id: 'heart-archway',
+    src: '/assets/sunset-lagoon/heart_archway_gardens.jpg',
+    alt: 'Heart-shaped topiary archway along the brick path leading to event marquees',
+    title: 'Heart Topiary Arch & Walkway',
+    category: 'gardens',
+    categoryLabel: 'Gardens & Photo Spots',
+  },
+  {
+    id: 'sculpted-hedges',
+    src: '/assets/sunset-lagoon/sculpted_gardens_hedges.jpg',
+    alt: 'Sculpted geometric garden hedges beside paved walkway and thatched hall',
+    title: 'Sculpted Botanical Hedges',
+    category: 'gardens',
+    categoryLabel: 'Gardens & Photo Spots',
+  },
+  {
+    id: 'sunset-pergola',
+    src: '/assets/sunset-lagoon/sunset_pergola_garden.jpg',
+    alt: 'Golden hour sunlight shining over sculpted garden hedges framed by white pergola',
+    title: 'Golden Hour Pergola View',
+    category: 'gardens',
+    categoryLabel: 'Gardens & Photo Spots',
   },
 ];
 
@@ -282,4 +415,3 @@ export const FAQ_ITEMS: FAQItem[] = [
       'If heavy rain or an unavoidable schedule change prevents your daytime activity from running safely, contact management directly on 077 113 9692 before your scheduled slot begins so we can arrange a rescheduled date or review your booking directly with you.',
   },
 ];
-
